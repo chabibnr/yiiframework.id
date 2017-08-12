@@ -1,0 +1,21 @@
+{
+    "name": "chabibnr/yii2-events",
+    "description": "Managements Events",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chabib Nurozak",
+            "email": "chabibdev@yiiframework.id"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "chabibnr\\events\\": ""
+        }
+    }
+}

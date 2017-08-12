@@ -32,6 +32,9 @@ return [
                 }
                 return false;
             }
-        ],
+        ]
     ],
+    'aliases' => [
+        '@chabibnr/events' => '@system/yii2-events'
+    ]
 ];

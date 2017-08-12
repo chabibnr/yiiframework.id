@@ -45,6 +45,10 @@ return [
         'comment' => [
             'class' => 'yeesoft\comment\CommentModule',
         ],
+        'events' => [
+            'class' => 'chabibnr\events\Module',
+            'userModel' => 'yeesoft\models\User'
+        ]
     ],
     'components' => [
         'request' => [

@@ -13,9 +13,11 @@ return [
         'auth' => [
             'class' => 'yeesoft\auth\AuthModule',
         ],
+        /*
         'events' => [
             'class' => 'chabibnr\events\Module',
             'userModel' => 'yeesoft\models\User',
+            /*
             'pathView' => '@frontend/views/events',
             'actions' => [
                 'default' => [
@@ -23,8 +25,8 @@ return [
                     'create' => [],
                     'delete' => []
                 ]
-            ]
-        ]
+            ] * /
+        ] */
     ],
     'components' => [
         'view' => [
@@ -50,6 +52,7 @@ return [
                 '<module:auth>/<action:(logout|captcha)>' => '<module>/default/<action>',
                 '<module:auth>/<action:(oauth)>/<authclient:\w+>' => '<module>/default/<action>',
                 '<module:events>' => 'events/default/index',
+                //'<module:events>/<id>/<action>' => '<module>/default/<action>',
             ),
             'multilingualRules' => [
                 '<module:auth>/<action:\w+>' => '<module>/default/<action>',

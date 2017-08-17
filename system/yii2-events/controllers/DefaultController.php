@@ -2,6 +2,7 @@
 
 namespace chabibnr\events\controllers;
 
+use chabibnr\events\components\actions\events\IndexAction;
 use Yii;
 use chabibnr\events\models\events;
 use chabibnr\events\models\EventsSearch;
@@ -15,6 +16,13 @@ use yii\filters\VerbFilter;
 class DefaultController extends Controller
 {
 
+    public function actions()
+    {
+        return [
+            'tesindex' => IndexAction::className()
+        ];
+    }
+
     use ControllerTrait;
     /**
      * @inheritdoc
@@ -22,6 +30,8 @@ class DefaultController extends Controller
     public function behaviors()
     {
         $actions = Yii::$app->controller->module->actions;
+        $myActions = isset($actions['default']) ? $actions['default'] : [];
+
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),

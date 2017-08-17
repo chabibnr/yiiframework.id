@@ -1,4 +1,12 @@
 <?php
+/**
+ * Name : Chabib Nurozak
+ * Email : chabibdev@gmail.com
+ * Date: 8/13/17
+ * Time: 10:15 AM
+ * Version: 1.0
+ * Website: https://chabibnr.net
+ */
 
 namespace chabibnr\events\models;
 
@@ -7,9 +15,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * EventsSearch represents the model behind the search form about `chabibnr\events\models\events`.
+ * EventsParticipantsSearch represents the model behind the search form about `chabibnr\events\models\EventsParticipants`.
  */
-class EventsSearch extends Events
+class EventsParticipantsSearch extends EventsParticipants
 {
     /**
      * @inheritdoc
@@ -17,8 +25,7 @@ class EventsSearch extends Events
     public function rules()
     {
         return [
-            [['id', 'date_start','date_end', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['slug', 'title', 'description', 'location', 'address'], 'safe'],
+            [['id', 'user_id', 'events_id', 'date_register', 'date_confirm', 'status'], 'integer'],
         ];
     }
 
@@ -40,7 +47,7 @@ class EventsSearch extends Events
      */
     public function search($params)
     {
-        $query = events::find();
+        $query = EventsParticipants::find();
 
         // add conditions that should always apply here
 
@@ -59,19 +66,18 @@ class EventsSearch extends Events
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'date_start' => $this->date_start,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
+            'user_id' => $this->user_id,
+            'events_id' => $this->events_id,
+            'date_register' => $this->date_register,
+            'date_confirm' => $this->date_confirm,
+            'status' => $this->status,
         ]);
-
-        $query->andFilterWhere(['like', 'slug', $this->slug])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'location', $this->location])
-            ->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;
     }
 }
+
+/**
+ * End of File : EventsParticipantsSearch.php
+ *
+ */

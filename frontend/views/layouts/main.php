@@ -65,11 +65,22 @@ ThemeAsset::register($this);
 
     NavBar::end();
     ?>
-
+<div style="margin-top: 64px; background: #283237">
+    <div class="container clearfix">
+        <h3 class="pull-left" style="font-weight: 300; margin: 20px 0; color: #fff">
+            <?=$this->title?>
+        </h3><?= Breadcrumbs::widget([
+            'options' => [
+                'class' => 'breadcrumb pull-right',
+                'style' => 'background: transparent !important; font-size: 20px; font-weight: 300; margin-bottom: 0; margin-top:12px; padding-right:0'
+            ],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
+        ]) ?>
+    </div>
+</div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []]) ?>
                 <?= Alert::widget() ?>
                 <?= $content ?>
             </div>

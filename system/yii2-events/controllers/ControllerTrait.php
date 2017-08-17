@@ -7,8 +7,10 @@
  */
 
 namespace chabibnr\events\controllers;
+use chabibnr\events\models\EventsParticipants;
+use chabibnr\events\models\EventsSpeakers;
 use Yii;
-use chabibnr\events\models\events;
+use chabibnr\events\models\Events;
 use chabibnr\events\models\EventsSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -25,7 +27,7 @@ trait ControllerTrait
         $searchModel = new EventsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('../main/index', [
+        return $this->render('/main/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -38,7 +40,7 @@ trait ControllerTrait
      */
     public function actionView($id)
     {
-        return $this->render('../main/view', [
+        return $this->render('/main/view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -55,7 +57,7 @@ trait ControllerTrait
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('../main/create', [
+            return $this->render('/main/create', [
                 'model' => $model,
             ]);
         }
@@ -74,7 +76,7 @@ trait ControllerTrait
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('../main/update', [
+            return $this->render('/main/update', [
                 'model' => $model,
             ]);
         }
@@ -93,16 +95,70 @@ trait ControllerTrait
         return $this->redirect(['index']);
     }
 
+    public function actionInviteUser($id){
+        $slug = !is_numeric($id)? $id: 0;
+        $getEvent = $this->findModel($slug);
+        if($getEvent->status == Events::STATUS_OPEN){
+            $user = Yii::$app->user->id;
+            $isJoin = EventsParticipants::findOne(['user_id' => $user]);
+            if($isJoin == false){
+                $model = new EventsParticipants();
+                $model->user_id = Yii::$app->user->id;
+                $model->events_id = $getEvent->id;
+                $model->date_register = date('U');
+                $model->status = EventsParticipants::STATUS_JOIN;
+                $model->save();
+            }
+        }
+        $this->redirect(['/'. $this->module->id.'/default/view','id' => $getEvent->slug]);
+    }
+
+    public function actionConfirmUser($id){
+        $slug = !is_numeric($id)? $id: 0;
+        $getEvent = $this->findModel($slug);
+        if($getEvent->status == Events::STATUS_CONFIRM){
+            $user = Yii::$app->user->id;
+            $isJoin = EventsParticipants::findOne(['user_id' => $user]);
+            if($isJoin != false){
+                $isJoin->date_confirm = date('U');
+                $isJoin->status = EventsParticipants::STATUS_CONFIRM;
+                $isJoin->save();
+            }
+        }
+        $this->redirect(['/'. $this->module->id.'/default/view','id' => $getEvent->slug]);
+    }
+
+    public function actionSpeakers($events,$id = ''){
+        if(empty($id)){
+            $model = new EventsSpeakers();
+            $model->events_id = $events;
+        } else {
+            $model = EventsSpeakers::findOne(['id' => $id, 'events_id' => $events]);
+            if($model == null){
+                throw new NotFoundHttpException("Halaman tidak tersedia");
+            }
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->redirect(['view', 'id' => $model->events_id]);
+        }
+
+        return $this->render('/main/form_speakers',[
+            'model' => $model
+        ]);
+    }
+
     /**
      * Finds the events model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer|string $id
      * @return events the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = events::findOne($id)) !== null) {
+        $filter = is_numeric($id) ?['id' => $id] : ['slug' => $id];
+        if (($model = Events::findOne($filter)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

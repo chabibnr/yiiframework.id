@@ -1,6 +1,7 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'name' => 'Yii Framework Indonesia',
     'bootstrap' => ['comments', 'yee'],
     'language' => 'en-US',
     'sourceLanguage' => 'en-US',

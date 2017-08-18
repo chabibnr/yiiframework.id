@@ -27,6 +27,15 @@ if($model->status == Events::STATUS_OPEN){
     $open = 'alert-primary';
     $msg = "Acara ini telah selesai";
 }
+
+$style = <<<CSS
+.event-detail dl dt{
+    border-bottom: #ccc;
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+}
+CSS;
+$this->registerCss($style);
 ?>
 <div class="events-view" style=" font-weight: 300">
     <h3>Pembicara</h3>
@@ -45,7 +54,7 @@ if($model->status == Events::STATUS_OPEN){
     </div>
     </div>
     <div class="row">
-        <div class="col-md-5" style="font-size: 18px;">
+        <div class="col-md-5 event-detail" style="font-size: 18px;">
             <dl>
                 <dt>Acara</dt>
                 <dd><?= $model->title ?></dd>

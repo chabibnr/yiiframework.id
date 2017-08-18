@@ -44,10 +44,6 @@ return [
         ],
         'comment' => [
             'class' => 'yeesoft\comment\CommentModule',
-        ],
-        'events' => [
-            'class' => 'chabibnr\events\Module',
-            'userModel' => 'yeesoft\models\User'
         ]
     ],
     'components' => [
@@ -74,9 +70,9 @@ return [
                 //'<controller:(test)>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 //'<controller:(test)>/<action:\w+>' => '<controller>/<action>',
                 //yee cms and other modules routes
-                '<module:(events)>/' => '<module>/yee-cms/index',
-                '<module:(events)>/<action>' => '<module>/yee-cms/<action>',
-                '<module:(events)>/<action>/<id>' => '<module>/yee-cms/<action>',
+                //'<controller:(events)>' => '<controller>/index',
+                '<controller:(events)>/<action>' => '<controller>/<action>',
+                '<controller:(events)>/<action:(view)>/<id:\w+>' => '<controller>/<action>',
                 '<module:\w+>/' => '<module>/default/index',
                 '<module:\w+>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
                 '<module:\w+>/<action:(create)>' => '<module>/default/<action>',

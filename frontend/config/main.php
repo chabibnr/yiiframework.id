@@ -51,7 +51,7 @@ return [
             'rules' => array(
                 '<module:auth>/<action:(logout|captcha)>' => '<module>/default/<action>',
                 '<module:auth>/<action:(oauth)>/<authclient:\w+>' => '<module>/default/<action>',
-                '<module:events>' => 'events/default/index',
+                '<controller:events>' => 'events/index',
                 //'<module:events>/<id>/<action>' => '<module>/default/<action>',
             ),
             'multilingualRules' => [

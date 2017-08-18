@@ -8,7 +8,7 @@
  * Website: https://chabibnr.net
  */
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 
 use chabibnr\events\components\actions\participant\CancelAction;
@@ -19,65 +19,37 @@ use chabibnr\events\components\actions\participant\InviteUserAction;
 use chabibnr\events\components\actions\speaker\FormAction as FormSpeakerAction;
 use chabibnr\events\components\actions\events\UpdateAction;
 use chabibnr\events\components\actions\events\ViewAction;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use yeesoft\controllers\admin\DashboardController;
 use chabibnr\events\components\actions\events\IndexAction;
 
-class EventsController extends Controller
+class EventsController extends DashboardController
 {
     public $userModel = 'yeesoft\models\User';
     public $defaultAction = 'index';
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['invite-user', 'confirm-user','cancel-user'],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-    }
-
     function actions()
     {
+        parent::actions();
         return [
             'index' => [
                 'class' => IndexAction::className(),
-                'viewPath' => '@frontend/views/events'
+                //'viewPath' => '@frontend/views/events'
             ],
-            'view' => [
+            'lihat' => [
                 'class' => ViewAction::className(),
-                'viewPath' => '@frontend/views/events'
+                //'viewPath' => '@frontend/views/events'
             ],
-            /*
-            'create' => [
+            'buat' => [
                 'class' => CreateAction::className(),
                 //'viewPath' => '@frontend/views/events'
             ],
-            'update' => [
+            'perbarui' => [
                 'class' => UpdateAction::className(),
                 //'viewPath' => '@frontend/views/events'
             ],
-            'delete' => [
+            'hapus' => [
                 'class' => DeleteAction::className(),
                 //'viewPath' => '@frontend/views/events'
-            ], */
+            ],
             'invite-user' => [
                 'class' => InviteUserAction::className(),
                 //'viewPath' => '@frontend/views/events'
@@ -89,12 +61,14 @@ class EventsController extends Controller
             'cancel-user' => [
                 'class' => CancelAction::className(),
                 //'viewPath' => '@frontend/views/events'
-            ], /*
-            'speaker' => [
+            ],
+            'speakers' => [
                 'class' => FormSpeakerAction::className(),
                 //'viewPath' => '@frontend/views/events'
-            ] */
+            ]
         ];
+
+
     }
 }
 

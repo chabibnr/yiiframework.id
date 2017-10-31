@@ -1,5 +1,11 @@
 # yiiframework.id (yee cms)
 
+Kontribusi
+----------
+1. Fork Repo ini
+2. _Pull request_ pada _branch_ **dev**
+
+
 Installation
 ------------
 

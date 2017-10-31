@@ -1,25 +1,13 @@
-# YEE CMS
-YeeCMS - Control Panel Based On Yii2 PHP Framework
+# yiiframework.id (yee cms)
 
 Installation
 ------------
 
 ### Installing Yee CMS application. 
 
-  1. Installing (using Composer)
+  1. Clone Repo ini 
 
-    If you do not have [Composer](http://getcomposer.org/), follow the instructions in the
-    [Installing Yii](https://github.com/yiisoft/yii2/blob/master/docs/guide/start-installation.md#installing-via-composer) section of the definitive guide to install it.
-
-    With Composer installed, you can then install the application using the following commands:
-
-    ```bash
-    cd /var/www/
-    composer global require "fxp/composer-asset-plugin:^1.2.0"
-    composer create-project --prefer-dist --stability=dev yeesoft/yii2-yee-cms mysite.com 
-    ```
-
-  2. Initialize the installed application
+  2. Init aplikasi
 
      Execute the `init` command and select `dev` or `prod` as environment.
 
@@ -102,12 +90,13 @@ Installation
      ```
      
        
-  4. Create a new database and adjust the `components['db']` configuration in `common/config/main-local.php` accordingly.
+  4. Buat koneksi ke database `components['db']` konfigurasi di `common/config/main-local.php`.
 
-  5. Apply all migrations with console command `php yii migrate --migrationLookup=@yeesoft/yii2-yee-core/migrations/,@yeesoft/yii2-yee-auth/migrations/,@yeesoft/yii2-yee-settings/migrations/,@yeesoft/yii2-yee-menu/migrations/,@yeesoft/yii2-yee-user/migrations/,@yeesoft/yii2-yee-translation/migrations/,@yeesoft/yii2-yee-media/migrations/,@yeesoft/yii2-yee-post/migrations/,@yeesoft/yii2-yee-page/migrations/,@yeesoft/yii2-comments/migrations/,@yeesoft/yii2-yee-comment/migrations/,@yeesoft/yii2-yee-seo/migrations/`.
+  5. import database di folder db
 
-  6. Init root user with console command `php yii init-admin`.
+  6. init root user dengan `php yii init-admin`.
 
-  7. Configurate your mailer `['components']['mailer']` in `common/config/main-local.php`.
+  7. Konfigurasi Mailer `['components']['mailer']` di `common/config/main-local.php`.
 
-#####Your `Yee CMS` application is installed. Visit your site `mysite.com` or admin panel `mysite.com/admin`, the site should work and message _Congratulations! You have successfully created your Yii-powered application_ should be displayed.
+### aplikasi telah berhasil terpasang
+silahkan akses di mysite.com dan akses adminnya di mysite.com/admin
